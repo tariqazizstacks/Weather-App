@@ -10,46 +10,124 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background-image: url("images/bg3.png");
+            background-position: center;
+            background-size: cover;
         }
         .box{
-            height: 400px;
+            height: 418px;
             width: 400px;
-            border: 3px rgb(11, 10, 10) solid;
-
+            border: 6px rgb(78, 73, 73) solid;
+            border-radius: 20px;
+            background-color: rgb(165, 213, 255);
         }
+        
         .col{
-            height: 128px;
+            padding-top: 2px;
+            height: 130px;
             width: 395px;
-             border: 3px red solid;
-             display: flex;
-             flex-direction: row;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 8px;
         }
         .row{
-            height: 122px;
-            width: 200px;
-            border: 2px green solid;
+            height: 125px;
+            width: 215px;
+            border: 5px rgb(89, 163, 223) solid;
             border-radius: 23px;
-           
-           
+            padding-left: 25px;
+            margin-left: 3px;
+             
         }
+
+        h3{
+            font-size: x-large;
+        }
+
+         input{
+            height: 42px;
+            width: 261px;
+            border:3px black solid;
+            border-radius: 15px;
+            padding-left: 0px;
+            font-size: 19px;
+            font-weight: bold;
+         }
+         input:hover{
+            background-color: burlywood;
+         }
+         .searchbar{
+            height: 50px;
+            width: 400px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 0px;
+            margin-bottom: 5px;
+             
+         }
+         button{
+            height: 42 px;
+            width: 135px;
+            background-color: black;
+            border:3px black solid;
+            border-radius: 15px;
+            color: azure;
+            font-size: 20px;
+            font-weight: bold;
+         }
+         button:hover{
+            background-color: blue;
+         }
+         h1{
+            margin-top: 0%;
+            height: 52px;
+            width: 250px;
+            font-size: 40px;
+            background-color: bisque;
+            color: black;
+            border: 5px rgb(250, 159, 21) solid;
+            border-radius: 15px;
+            text-align: center;
+         }
     </style>
 </head>
 <body>
     <h1>Weather-App</h1>
-    <input type="text">
+    <div class="searchbar">
+    <input type="text" placeholder="Enter Your City Name ">
     <button>ENTER</button>
+    </div>
     <div class="box">
-         <div class="col">
-            <div class="row" id="temp"><h3>Temperature</h3></div>
-            <div class="row" id="feellike"><h3>Feels Like</h3></div>
+         <div class="col" id="colone">
+            <div class="row" >
+                <h2>Temprature🌞</h2>
+                <h3 id="temp"> </h3>
+            </div>
+            <div class="row" >
+                <h2>Feels Like 🌨️</h2>
+                <h3 id="feellike"> </h3>
+            </div>
+         </div>
+         <div class="col" id="coltwo">
+             <div class="row" >
+                <h2>Pressure🌡️🌡️</h2>
+                <h3 id="pressure"> </h3>
+            </div>
+            <div class="row" >
+                <h2>Sea Level</h2>
+                <h3 id="sealevel"> </h3>
+            </div>
          </div>
          <div class="col">
-             <div class="row" id="pressure"><h3>Pressure</h3></div>
-            <div class="row" id="sealevel"><h3>Sea Level</h3></div>
-         </div>
-         <div class="col">
-             <div class="row" id="humidity"><h3>Humidity</h3></div>
-             <div class="row" id="windspeed"><h3>Wind Speed</h3></div>
+             <div class="row" >
+                <h2>Humidity 🌨️</h2>
+                <h3 id="humidity"> </h3>
+            </div>
+             <div class="row" >
+                <h2>Wind Speed🚅</h2>
+                <h3 id="windspeed"> </h3>
+            </div>
          </div>
          
     </div>
@@ -72,15 +150,16 @@
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=dbe2c0348b53deca981f9814a3b6d4c7&units=metric`)
         .then((Response)=>Response.json())
         .then((data)=>{
-            Temperature.innerText=data.main.temp;
-            feel.innerText=data.main.feels_like;
-            pres.innerText=data.main.pressure;
+            Temperature.innerText=data.main.temp + " C";
+            feel.innerText=data.main.feels_like +" C";;
+            pres.innerText=data.main.pressure +" Pa";
             sea.innerText = data.main.sea_level ? data.main.sea_level + " hPa" : "N/A";
 
-            humid.innerText=data.main.humidity;
-            winds.innerText=data.wind.speed;
+            humid.innerText=data.main.humidity +" %";
+            winds.innerText=data.wind.speed +" m/s";
         });
     });
+    
     
     </script>
     
