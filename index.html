@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather-App</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .box{
+            height: 400px;
+            width: 400px;
+            border: 3px rgb(11, 10, 10) solid;
+
+        }
+        .col{
+            height: 128px;
+            width: 395px;
+             border: 3px red solid;
+             display: flex;
+             flex-direction: row;
+        }
+        .row{
+            height: 122px;
+            width: 200px;
+            border: 2px green solid;
+            border-radius: 23px;
+           
+           
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather-App</h1>
+    <input type="text">
+    <button>ENTER</button>
+    <div class="box">
+         <div class="col">
+            <div class="row" id="temp"><h3>Temperature</h3></div>
+            <div class="row" id="feellike"><h3>Feels Like</h3></div>
+         </div>
+         <div class="col">
+             <div class="row" id="pressure"><h3>Pressure</h3></div>
+            <div class="row" id="sealevel"><h3>Sea Level</h3></div>
+         </div>
+         <div class="col">
+             <div class="row" id="humidity"><h3>Humidity</h3></div>
+             <div class="row" id="windspeed"><h3>Wind Speed</h3></div>
+         </div>
+         
+    </div>
+
+    <script>
+       
+        let inpt=document.querySelector("input");
+        let btn=document.querySelector("button");
+        let txt=document.querySelector("h2");
+
+        let Temperature=document.getElementById("temp");
+        let  feel=document.getElementById("feellike");
+        let  pres=document.getElementById("pressure");
+        let sea=document.getElementById("sealevel");
+        let  humid=document.getElementById("humidity");
+        let winds=document.getElementById("windspeed");
+
+        btn.addEventListener("click",()=>{
+        let city=inpt.value;
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=dbe2c0348b53deca981f9814a3b6d4c7&units=metric`)
+        .then((Response)=>Response.json())
+        .then((data)=>{
+            Temperature.innerText=data.main.temp;
+            feel.innerText=data.main.feels_like;
+            pres.innerText=data.main.pressure;
+            sea.innerText = data.main.sea_level ? data.main.sea_level + " hPa" : "N/A";
+
+            humid.innerText=data.main.humidity;
+            winds.innerText=data.wind.speed;
+        });
+    });
+    
+    </script>
+    
+</body>
+</html>
